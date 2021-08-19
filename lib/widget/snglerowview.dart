@@ -172,6 +172,7 @@ class _EachRowViewState extends State<EachRowView> {
                                   Infochild: "Name",
                                   ChildKey: widget.snapshot.key.toString(),
                                   UpdatedValue: namecontroller.text);
+                              namecontroller.clear();
                             } else {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(
@@ -198,6 +199,7 @@ class _EachRowViewState extends State<EachRowView> {
                                   Infochild: "Roll Number",
                                   ChildKey: widget.snapshot.key.toString(),
                                   UpdatedValue: rollNumbercontroller.text);
+                              rollNumbercontroller.clear();
                             } else {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(
