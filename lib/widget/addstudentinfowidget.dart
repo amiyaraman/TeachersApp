@@ -114,14 +114,24 @@ class _AddStudentInfoWidgetState extends State<AddStudentInfoWidget> {
                           ]),
                           ElevatedButton(
                               onPressed: () {
-                                if (picked != null || field_one.text.isEmpty||field_two.text.isEmpty||_chossevalue==null) {
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please Fill the value"),));
-                                } else{
-                                uploadToFirebase.addtofirebase(
-                                    name: field_one.text,
-                                    dob: picked.toString(),
-                                    gender: _chossevalue,
-                                    rollnumber: field_two.text);}
+                                if (picked == null ||
+                                    field_one.text.isEmpty ||
+                                    field_two.text.isEmpty ||
+                                    _chossevalue == null) {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                    content: Text("Please Fill the value"),
+                                  ));
+                                } else {
+                                  picked = date1.format(picked);
+                                  uploadToFirebase.addtofirebase(
+                                      name: field_one.text,
+                                      dob: picked.toString(),
+                                      gender: _chossevalue,
+                                      rollnumber: field_two.text);
+                                  field_one.clear();
+                                  field_two.clear();
+                                }
                               },
                               child: Text("Submit")),
                         ],

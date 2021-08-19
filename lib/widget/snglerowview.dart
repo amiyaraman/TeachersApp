@@ -141,92 +141,107 @@ class _EachRowViewState extends State<EachRowView> {
   }
 
   void EditStudentInfo(context) {
-    var namecontroller  = TextEditingController();
-    var rollNumbercontroller  = TextEditingController();
+    var namecontroller = TextEditingController();
+    var rollNumbercontroller = TextEditingController();
     var picked;
     var date1 = DateFormat('d-MM-yyyy');
     showBottomSheet(
         context: context,
         builder: (BuildContext builder) {
           return Container(
-              height: 2*MediaQuery.of(context).size.height / 7,
+              height: MediaQuery.of(context).size.height / 2,
               width: MediaQuery.of(context).size.width,
               child: Container(
-                  width: 3 * MediaQuery.of(context).size.width / 4,
-                  child: Column(children: [
-                      Row(children: [
-                            Container(
-                              width: 4 * MediaQuery.of(context).size.width / 5,
-                              child: TextField(
-                                controller: namecontroller,
-                                decoration: InputDecoration(
-                                  labelText: "Update Student Name",
-                                ),
-                              ),
-                            ),
-                            IconButton(
-                                onPressed: () {
-                                  if(!namecontroller.text.isEmpty){
-                                    Upload.UpdateValue(Infochild:"Update Student Name", ChildKey: widget.snapshot.key.toString(), UpdatedValue: namecontroller.text);}
-                                  else{
-                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please Fill the value"),));
-                                  }                                }, icon: Icon(Icons.done)),
-                          ])
-                    ,
-                          Row(children: [
-                            Container(
-                              width: 4 * MediaQuery.of(context).size.width / 5,
-                              child: TextField(
-                                controller: rollNumbercontroller,
-                                decoration: InputDecoration(
-                                  labelText: "Update RollNumber",
-                                ),
-                              ),
-                            ),
-                            IconButton(
-                                onPressed: () {
-                                  if(!rollNumbercontroller.text.isEmpty){
-                                  Upload.UpdateValue(Infochild:"Roll Number", ChildKey: widget.snapshot.key.toString(), UpdatedValue: rollNumbercontroller.text);}
-                                  else{
-                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please Fill the value"),));
-                                  }
-                                }, icon: Icon(Icons.done)),
-                          ]),
-                          Row(children: [
-                            Text('Update DOB'),
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              width: 3 * MediaQuery.of(context).size.width / 5,
-                              child: DateTimeField(
-                                format: DateFormat("yyyy-MM-dd"),
-                                onShowPicker: (context, currentValue) async {
-                                  picked = await showDatePicker(
-                                      context: context,
-                                      firstDate: DateTime(1900),
-                                      initialDate:
-                                          currentValue ?? DateTime.now(),
-                                      lastDate: DateTime(2100));
+                width: 3 * MediaQuery.of(context).size.width / 4,
+                child: Column(
+                  children: [
+                    Row(children: [
+                      Container(
+                        width: 4 * MediaQuery.of(context).size.width / 5,
+                        child: TextField(
+                          controller: namecontroller,
+                          decoration: InputDecoration(
+                            labelText: "Update Student Name",
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            if (!namecontroller.text.isEmpty) {
+                              Upload.UpdateValue(
+                                  Infochild: "Update Student Name",
+                                  ChildKey: widget.snapshot.key.toString(),
+                                  UpdatedValue: namecontroller.text);
+                            } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text("Please Fill the value"),
+                              ));
+                            }
+                          },
+                          icon: Icon(Icons.done)),
+                    ]),
+                    Row(children: [
+                      Container(
+                        width: 4 * MediaQuery.of(context).size.width / 5,
+                        child: TextField(
+                          controller: rollNumbercontroller,
+                          decoration: InputDecoration(
+                            labelText: "Update RollNumber",
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            if (!rollNumbercontroller.text.isEmpty) {
+                              Upload.UpdateValue(
+                                  Infochild: "Roll Number",
+                                  ChildKey: widget.snapshot.key.toString(),
+                                  UpdatedValue: rollNumbercontroller.text);
+                            } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text("Please Fill the value"),
+                              ));
+                            }
+                          },
+                          icon: Icon(Icons.done)),
+                    ]),
+                    Row(children: [
+                      Text('Update DOB'),
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        width: 3 * MediaQuery.of(context).size.width / 5,
+                        child: DateTimeField(
+                          format: DateFormat("yyyy-MM-dd"),
+                          onShowPicker: (context, currentValue) async {
+                            picked = await showDatePicker(
+                                context: context,
+                                firstDate: DateTime(1900),
+                                initialDate: currentValue ?? DateTime.now(),
+                                lastDate: DateTime(2100));
 
-                                  return picked;
-                                },
-                              ),
-                            ),
-                            IconButton(
-                                onPressed: () {
-                                  if(picked == null|| picked.toString().isEmpty){
-
-                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please Fill the value"),));
-                                  }
-                                  else{
-                                    picked = date1.format(picked);
-                                    Upload.UpdateValue(Infochild:"Date Of Birth", ChildKey: widget.snapshot.key.toString(), UpdatedValue: picked.toString());
-
-
-                                  }
-
-
-                                }, icon: Icon(Icons.done)),
-                          ]),
+                            return picked;
+                          },
+                        ),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            if (picked == null || picked.toString().isEmpty) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text("Please Fill the value"),
+                              ));
+                            } else {
+                              picked = date1.format(picked);
+                              Upload.UpdateValue(
+                                  Infochild: "Date Of Birth",
+                                  ChildKey: widget.snapshot.key.toString(),
+                                  UpdatedValue: picked.toString());
+                            }
+                          },
+                          icon: Icon(Icons.done)),
+                    ]),
                     Row(children: [
                       Text('Update Gender '),
                       Container(
@@ -235,11 +250,8 @@ class _EachRowViewState extends State<EachRowView> {
                         child: DropdownButton<String>(
                           value: _chossevalue,
                           style: TextStyle(color: Colors.blueAccent),
-                          items: <String>[
-                            'Male',
-                            'Female',
-                            'Other'
-                          ].map<DropdownMenuItem<String>>((String value) {
+                          items: <String>['Male', 'Female', 'Other']
+                              .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(value),
@@ -254,17 +266,23 @@ class _EachRowViewState extends State<EachRowView> {
                       ),
                       IconButton(
                           onPressed: () {
-                            if(_chossevalue==null){
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please Fill the value"),));
+                            if (_chossevalue == null) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text("Please Fill the value"),
+                              ));
+                            } else {
+                              Upload.UpdateValue(
+                                  Infochild: "Gender",
+                                  ChildKey: widget.snapshot.key.toString(),
+                                  UpdatedValue: _chossevalue);
                             }
-                            else{
-                              Upload.UpdateValue(Infochild:"Gender", ChildKey: widget.snapshot.key.toString(), UpdatedValue: _chossevalue);
-                            }
-
-                          }, icon: Icon(Icons.done)),
+                          },
+                          icon: Icon(Icons.done)),
                     ]),
-                        ],
-                      ),
-                    ));});
+                  ],
+                ),
+              ));
+        });
   }
 }
