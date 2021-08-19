@@ -169,7 +169,7 @@ class _EachRowViewState extends State<EachRowView> {
                           onPressed: () {
                             if (!namecontroller.text.isEmpty) {
                               Upload.UpdateValue(
-                                  Infochild: "Update Student Name",
+                                  Infochild: "Name",
                                   ChildKey: widget.snapshot.key.toString(),
                                   UpdatedValue: namecontroller.text);
                             } else {
